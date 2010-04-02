@@ -15,8 +15,7 @@ class Jasc < Padrino::Application
     # disable :padrino_mailer     # Disables padrino mailer (enabled by default if present)
     # disable :flash              # Disables rack-flash (enabled by default)
     # enable  :authentication     # Enable padrino-admin authentication (disabled by default)
-    # layout  :my_layout          # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
-    #
+    layout  :default          # Layout can be in views/layouts/foo.ext or views/foo.ext (default :application)
   end
 
   ##
@@ -35,4 +34,12 @@ class Jasc < Padrino::Application
   #   end
   #
 
+
+  get '/' do
+    haml :index
+  end
+
+  get :about, :map => '/about_us' do
+    render :haml, '%p This is a sample blog stuff thingy bob ha ha goodbye'
+  end
 end
