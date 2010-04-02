@@ -9,3 +9,6 @@ vendor/gems/*
 *.swp
 .bundle
 
+db/*.db
+db/schema.rb
+
