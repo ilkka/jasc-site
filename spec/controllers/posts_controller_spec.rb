@@ -37,7 +37,7 @@ describe "PostsController" do
 
   context "when showing a single post" do
     before do
-      Post.expects(:find_by_id).with(3).returns @post3
+      Post.expects(:find_by_id).with('3').returns @post3
       get '/posts/show/3'
     end
 
