@@ -4,6 +4,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/boot")
 Spec::Runner.configure do |conf|
   conf.mock_with :mocha
   conf.include Rack::Test::Methods
+  conf.include Shoulda::ActiveRecord::Matchers
 end
 
 def app
