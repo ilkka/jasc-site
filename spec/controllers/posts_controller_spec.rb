@@ -2,21 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper.rb')
 
 describe "PostsController" do
   before do
+    @account = Account.new(:email => 'foo@bar.com')
     @posts = []
-    @post1 = Post.new
-    @post1.id = "1"
-    @post1.title = "Test post 1 title"
-    @post1.body = "Test post 1 body"
+    @post1 = Post.new(:title => "Test post 1 title", :body => "Test post 1 body", :account => @account)
+    @post1.id = '1'
     @posts << @post1
-    @post2 = Post.new
-    @post2.id = "2"
-    @post2.title = "Test post 2 title"
-    @post2.body = "Test post 2 body"
+    @post2 = Post.new(:title => "Test post 2 title", :body => "Test post 2 body", :account => @account)
+    @post2.id = '2'
     @posts << @post2
-    @post3 = Post.new
-    @post3.id = "3"
-    @post3.title = "Test post 3 title"
-    @post3.body = "Test post 3 body"
+    @post3 = Post.new(:title => "Test post 3 title", :body => "Test post 3 body", :account => @account)
+    @post3.id = '3'
     @posts << @post3
   end
 
@@ -31,6 +26,7 @@ describe "PostsController" do
       @posts.each do |post|
         last_response.body.should include(post.title)
         last_response.body.should include(post.body)
+        last_response.body.should include(post.account.email)
       end
     end
   end
@@ -45,6 +41,7 @@ describe "PostsController" do
     it "should show that post" do
       last_response.body.should include(@post3.title)
       last_response.body.should include(@post3.body)
+      last_response.body.should include(@post3.account.email)
     end
   end
 end
