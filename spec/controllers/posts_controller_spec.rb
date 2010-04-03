@@ -13,11 +13,11 @@ describe "PostsController" do
     post.title = "Test post 2"
     post.body = "Test post 2 body"
     @posts << post
-    Post.expects(:all).returns(@posts)
   end
 
   context "when index route used" do
     before do
+      Post.expects(:all).returns(@posts)
       get '/posts'
     end
 
