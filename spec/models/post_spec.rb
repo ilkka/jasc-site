@@ -8,8 +8,7 @@ describe Post do
     @post.should_not be_nil
   end
 
-  context 'when title is empty' do
-    it { should_not be_valid }
-    specify { @post.save.should == false }
-  end
+  it { should validate_presence_of :title }
+  it { should validate_presence_of :body }
+  
 end
