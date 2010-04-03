@@ -5,14 +5,16 @@ describe "PostsController" do
     before do
       @posts = []
       post = Post.new
+      post.id = "1"
       post.title = "Test post 1"
       post.body = "Test post 1 body"
       @posts << post
       post = Post.new
+      post.id = "2"
       post.title = "Test post 2"
       post.body = "Test post 2 body"
       @posts << post
-      Post.expects(:find_all).returns(@posts)
+      Post.expects(:all).returns(@posts)
 
       get '/posts'
     end
