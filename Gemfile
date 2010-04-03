@@ -15,6 +15,7 @@ gem 'authlogic'
 gem 'mocha', :group => "test"
 gem 'rspec', :group => "test", :require => "spec"
 gem 'rack-test', :require => 'rack/test', :group => 'test'
+gem 'shoulda', :group => 'test'
 
 # Padrino
 gem 'padrino', "0.9.9"
