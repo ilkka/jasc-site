@@ -43,8 +43,8 @@ describe "PostsController" do
 
     specify { last_response.should be_ok }
     it "should show that post" do
-      @response.body.should include(@post3.title)
-      @response.body.should include(@post3.body)
+      last_response.body.should include(@post3.title)
+      last_response.body.should include(@post3.body)
     end
   end
 end
