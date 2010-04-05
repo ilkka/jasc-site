@@ -1,2 +1,6 @@
-- @title = "Welcome"
+- @title = "Blahg"
+- content_for :include do
+  = feed_tag :rss, url(:posts, :index, :format => :rss), :title => 'RSS
+  = feed_tag :atom, url(:posts, :index, :format => :atom), :title => 'Atom'
+
 #posts= partial 'posts/post', :collection => @posts
