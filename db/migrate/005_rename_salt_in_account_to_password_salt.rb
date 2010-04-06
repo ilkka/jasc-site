@@ -1,13 +1,9 @@
 class RenameSaltInAccountToPasswordSalt < ActiveRecord::Migration
   def self.up
-    change_table :accounts do |t|
-      t.rename_column :salt, :password_salt
-    end
+    rename_column :accounts, :salt, :password_salt
   end
 
   def self.down
-    change_table :accounts do |t|
-      t.rename_column :password_salt, :salt
-    end
+    rename_column :accounts, :password_salt, :salt
   end
 end
