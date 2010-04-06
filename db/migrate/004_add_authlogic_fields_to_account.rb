@@ -1,7 +1,7 @@
 class AddAuthlogicFieldsToAccount < ActiveRecord::Migration
   def self.up
     change_table :accounts do |t|
-      t.string :persistence_token, :null => false
+      t.string :persistence_token, :null => false, :default => 'FIXME'
       t.integer :login_count, :default => 0, :null => false
       t.datetime :last_request_at
       t.datetime :last_login_at
