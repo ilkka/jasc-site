@@ -34,14 +34,14 @@ class Account < ActiveRecord::Base
   # This method is used for retrive the original password.
   #
   def password_clean
-    crypted_password.decrypt(salt)
+    crypted_password.decrypt(password_salt)
   end
 
   private
     def generate_password
       return if password.blank?
-      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
-      self.crypted_password = password.encrypt(self.salt)
+      self.password_salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
+      self.crypted_password = password.encrypt(self.password_salt)
     end
 
     def password_required
