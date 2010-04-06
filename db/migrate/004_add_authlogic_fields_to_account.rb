@@ -1,6 +1,6 @@
 class AddAuthlogicFieldsToAccount < ActiveRecord::Migration
   def self.up
-    change_table :posts do |t|
+    change_table :accounts do |t|
       t.string :persistence_token, :null => false
       t.integer :login_count, :default => 0, :null => false
       t.datetime :last_request_at
@@ -12,7 +12,7 @@ class AddAuthlogicFieldsToAccount < ActiveRecord::Migration
   end
 
   def self.down
-    change_table :posts do |t|
+    change_table :accounts do |t|
       t.remove :persistence_token
       t.remove :login_count
       t.remove :last_request_at
