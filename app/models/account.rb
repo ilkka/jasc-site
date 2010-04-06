@@ -2,6 +2,10 @@ class UserSession < Authlogic::Session::Base
 end
 
 class Account < ActiveRecord::Base
+  acts_as_authentic do |c|
+    c.perishable_token_valid_for 24*60*60
+  end
+
   attr_accessor :password
 
   # Validations
