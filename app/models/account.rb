@@ -1,3 +1,6 @@
+class UserSession < Authlogic::Session::Base
+end
+
 class Account < ActiveRecord::Base
   attr_accessor :password
 
