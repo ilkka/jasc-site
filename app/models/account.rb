@@ -4,15 +4,16 @@ end
 class Account < ActiveRecord::Base
   acts_as_authentic do |c|
     c.perishable_token_valid_for 24*60*60
+    c.validates_length_of_password_field_options =
+     {:on => :update, :minimum => 6, :if => :has_no_credentials?}
+    c.validates_length_of_password_confirmation_field_options =
+     {:on => :update, :minimum => 6, :if => :has_no_credentials?}
   end
 
   attr_accessor :password
 
   # Validations
   validates_presence_of     :email, :role
-  validates_presence_of     :password,                   :if => :password_required
-  validates_presence_of     :password_confirmation,      :if => :password_required
-  validates_length_of       :password, :within => 4..40, :if => :password_required
   validates_confirmation_of :password,                   :if => :password_required
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email,    :case_sensitive => false
@@ -37,6 +38,36 @@ class Account < ActiveRecord::Base
     crypted_password.decrypt(password_salt)
   end
 
+  def active?
+    active
+  end
+  
+  def has_no_credentials?
+    crypted_password.blank? #&& self.openid_identifier.blank?
+  end
+  
+  def send_activation_email
+    Pony.mail(
+      :to => self.email,
+      :from => "no-reply@domain.tld",
+      :subject => "Activate your account",
+      :body => "You can activate your account at this link: " +
+                "http://domain.tld/activate/#{self.perishable_token}"
+    )
+  end
+  
+  def send_password_reset_email
+    Pony.mail(
+      :to => self.email,
+      :from => "no-reply@domain.tld",
+      :subject => "Reset your password",
+      :body => "We have recieved a request to reset your password. " +
+               "If you did not send this request, then please ignore this email.\n\n" +
+               "If you did send the request, you may reset your password using the following link: " +
+                "http://domain.tld/reset-password/#{self.perishable_token}"
+    )
+  end
+
   private
     def generate_password
       return if password.blank?
@@ -47,4 +78,5 @@ class Account < ActiveRecord::Base
     def password_required
       crypted_password.blank? || !password.blank?
     end
+
 end
