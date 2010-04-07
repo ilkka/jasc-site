@@ -5,9 +5,9 @@ class Account < ActiveRecord::Base
   acts_as_authentic do |c|
     c.perishable_token_valid_for 24*60*60
     c.validates_length_of_password_field_options =
-     {:on => :update, :minimum => 6, :if => :has_no_credentials?}
+     {:on => :update, :minimum => 6} #, :if => :has_no_credentials?}
     c.validates_length_of_password_confirmation_field_options =
-     {:on => :update, :minimum => 6, :if => :has_no_credentials?}
+     {:on => :update, :minimum => 6} #, :if => :has_no_credentials?}
   end
 
   attr_accessor :password
