@@ -34,9 +34,10 @@ class Account < ActiveRecord::Base
   ##
   # This method is used for retrive the original password.
   #
-  def password_clean
-    crypted_password.decrypt(password_salt)
-  end
+  # WTF?!
+  #def password_clean
+  #  crypted_password.decrypt(password_salt)
+  #end
 
   def active?
     active
