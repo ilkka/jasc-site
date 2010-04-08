@@ -13,8 +13,7 @@ class Account < ActiveRecord::Base
   attr_accessor :password
 
   # Validations
-  validates_presence_of     :email, :role, :username
-  validates_length_of :username, :within => 3..20
+  validates_presence_of     :email, :role
   validates_length_of :password, :minimum => 6
   validates_confirmation_of :password,                   :if => :password_required
   validates_length_of       :email,    :within => 3..100
