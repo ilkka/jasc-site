@@ -14,6 +14,7 @@ class Account < ActiveRecord::Base
 
   # Validations
   validates_presence_of     :email, :role
+  validates_length_of :password, :minimum => 6
   validates_confirmation_of :password,                   :if => :password_required
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email,    :case_sensitive => false
