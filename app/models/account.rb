@@ -4,17 +4,19 @@ end
 class Account < ActiveRecord::Base
   acts_as_authentic do |c|
     c.perishable_token_valid_for 24*60*60
-    c.validates_length_of_password_field_options =
-     {:on => :update, :minimum => 6} #, :if => :has_no_credentials?}
-    c.validates_length_of_password_confirmation_field_options =
-     {:on => :update, :minimum => 6} #, :if => :has_no_credentials?}
+    #c.validates_length_of_password_field_options =
+    # {:on => :update, :minimum => 6} #, :if => :has_no_credentials?}
+    #c.validates_length_of_password_confirmation_field_options =
+    # {:on => :update, :minimum => 6} #, :if => :has_no_credentials?}
   end
 
   attr_accessor :password
 
   # Validations
-  validates_presence_of     :email, :role
-  validates_confirmation_of :password,                   :if => :password_required
+  validates_presence_of     :email, :role, :password, :username
+  validates_length_of :password, :minimum => 6
+  validates_length_of :username, :within => 3..20
+  validates_confirmation_of :password
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :email,    :case_sensitive => false
   validates_format_of       :email,    :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
