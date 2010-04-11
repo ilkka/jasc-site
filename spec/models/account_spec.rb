@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper.rb')
 
 describe Account do
-  it { should validate_presence_of :password }
   it { should ensure_length_of(:password).is_at_least(6) }
 
   it { should validate_presence_of :email }
