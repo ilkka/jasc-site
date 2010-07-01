@@ -17,5 +17,5 @@ However, the mounted core can be modified as needed:
 =end
 
 # Mounts the core application for this project
-Padrino.mount_core("Jasc")
+Padrino.mount("Jasc").to("/")
 Padrino.mount("Admin").to("/admin")
