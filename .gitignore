@@ -12,3 +12,4 @@ vendor/gems/*
 db/*.db
 db/schema.rb
 
+.rvmrc
